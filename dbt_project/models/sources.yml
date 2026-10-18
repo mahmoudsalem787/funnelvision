@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw
+    database: FUNNELVISION
+    schema: RAW
+    tables:
+      - name: website_sessions
+      - name: website_pageviews
+      - name: orders
+      - name: order_items
+      - name: order_item_refunds
+      - name: products
