@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: dim_product
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_channel
+    columns:
+      - name: channel_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    columns:
+      - name: date_day
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_sessions
+    columns:
+      - name: website_session_id
+        tests:
+          - not_null
+          - unique
+      - name: channel_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_channel')
+              field: channel_id
+      - name: date_day
+        tests:
+          - relationships:
+              to: ref('dim_date')
+              field: date_day
+
+  - name: fct_orders
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('dim_product')
+              field: product_id
+      - name: channel_id
+        tests:
+          - relationships:
+              to: ref('dim_channel')
+              field: channel_id
+      - name: date_day
+        tests:
+          - relationships:
+              to: ref('dim_date')
+              field: date_day
+
+  - name: fct_refunds
+    columns:
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('dim_product')
+              field: product_id
