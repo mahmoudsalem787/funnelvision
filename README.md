@@ -13,7 +13,7 @@ CSV files -> Snowflake RAW -> dbt staging -> dbt intermediate -> dbt marts -> St
                         (everything runs in Docker)
 ```
 
-See `docs/architecture.png`.
+![Architecture](docs/architecture.svg)
 
 ## Stack
 

@@ -1,0 +1,13 @@
+flowchart LR
+    A[CSV files<br/>Maven Fuzzy Factory] --> B[(Snowflake<br/>RAW)]
+    B --> C[dbt staging<br/>6 models]
+    C --> D[dbt intermediate<br/>2 models]
+    D --> E[dbt marts<br/>3 facts + 3 dims]
+    E --> F[Streamlit dashboard<br/>localhost:8501]
+    G[Airflow DAG<br/>daily: dbt run, dbt test] -.-> C
+    G -.-> D
+    G -.-> E
+    subgraph Docker
+        G
+        F
+    end
