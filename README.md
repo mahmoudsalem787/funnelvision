@@ -6,11 +6,12 @@ orders, and which products get refunded?
 
 ## Architecture
 
-
-
-
-
-
+```
+CSV files -> Snowflake RAW -> dbt staging -> dbt intermediate -> dbt marts -> Streamlit
+                                   ^
+                        Airflow runs dbt run + dbt test daily
+                        (everything runs in Docker)
+```
 
 See `docs/architecture.png`.
 
@@ -73,6 +74,13 @@ You can change it in `docker-compose.yaml`.
 
 ## Project structure
 
+```
+airflow/        Dockerfile (Airflow + dbt-snowflake) and DAGs
+dbt_project/    dbt models (staging, intermediate, marts) and tests
+streamlit/      Dashboard app and Dockerfile
+docker-compose.yaml
+.env.example
+```
 
 ## Dashboard
 
