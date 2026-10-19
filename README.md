@@ -87,3 +87,12 @@ docker-compose.yaml
 4 KPIs (revenue, orders, conversion rate, refund rate), 3 charts
 (monthly revenue, revenue by channel, refund rate by product),
 filters for date range and device, queries cached with `st.cache_data`.
+
+## Screenshots
+
+| | |
+|---|---|
+| ![RAW](docs/screenshots/01_raw_loaded.png) | ![Staging](docs/screenshots/02_staging.png) |
+| ![Intermediate](docs/screenshots/03_intermediate.png) | ![Marts](docs/screenshots/04_marts.png) |
+| ![dbt test](docs/screenshots/05_dbt_test.png) | ![Docker](docs/screenshots/06_docker_ps.png) |
+| ![Airflow](docs/screenshots/07_airflow_grid.png) | ![Streamlit](docs/screenshots/08_streamlit.png) |
