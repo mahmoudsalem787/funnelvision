@@ -96,3 +96,18 @@ filters for date range and device, queries cached with `st.cache_data`.
 | ![Intermediate](docs/screenshots/03_intermediate.png) | ![Marts](docs/screenshots/04_marts.png) |
 | ![dbt test](docs/screenshots/05_dbt_test.png) | ![Docker](docs/screenshots/06_docker_ps.png) |
 | ![Airflow](docs/screenshots/07_airflow_grid.png) | ![Streamlit](docs/screenshots/08_streamlit.png) |
+
+## Ingestion
+
+Raw CSVs live in `data/` (source: Maven Analytics, Fuzzy Factory).
+`ingestion/load_raw.py` loads them into `FUNNELVISION.RAW` with Snowflake `PUT` + `COPY INTO`:
+
+```bash
+docker compose run --rm --no-deps --entrypoint bash \
+  -v "$(pwd)/data:/opt/airflow/data" \
+  -v "$(pwd)/ingestion:/opt/airflow/ingestion" \
+  airflow-scheduler \
+  -c "/home/airflow/dbt_venv/bin/python /opt/airflow/ingestion/load_raw.py"
+```
+
+Note: the largest file (`website_pageviews.csv`, 54 MB) failed to upload through the connector on the author's machine, so it was loaded with Snowsight (Load Data). You can load a single table with `... load_raw.py website_pageviews`.
